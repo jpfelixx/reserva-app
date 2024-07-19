@@ -28,7 +28,8 @@
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
               Gerenciar Salas
             </a>
             <ul class="dropdown-menu">
@@ -65,98 +66,28 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>Laboratório</td>
-                <td>PCs com intel i5, 8GB de RAM</td>
-                <td>20</td>
-                <td>Sim</td>
-                <td>
-                  <form action="">
-                    <button class="btn btn-sm btn-dark" type="submit" formaction="/cadastrar-sala">Editar</button>
-                    <button class="btn btn-sm btn-dark" type="submit" formaction="/reservas">Desativar</button>
-                    <button class="btn btn-sm btn-dark" type="submit" formaction="/reservas">Excluir</button>
-                  </form>
-                </td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Laboratório</td>
-                <td>PCs com intel i5, 8GB de RAM</td>
-                <td>20</td>
-                <td>Sim</td>
-                <td>
-                  <form action="">
-                    <button class="btn btn-sm btn-dark" type="submit" formaction="/cadastrar-sala">Editar</button>
-                    <button class="btn btn-sm btn-dark" type="submit" formaction="/reservas">Desativar</button>
-                    <button class="btn btn-sm btn-dark" type="submit" formaction="/reservas">Excluir</button>
-                  </form>
-                </td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Laboratório</td>
-                <td>PCs com intel i5, 8GB de RAM</td>
-                <td>20</td>
-                <td>Sim</td>
-                <td>
-                  <form action="">
-                    <button class="btn btn-sm btn-dark" type="submit" formaction="/cadastrar-sala">Editar</button>
-                    <button class="btn btn-sm btn-dark" type="submit" formaction="/reservas">Desativar</button>
-                    <button class="btn btn-sm btn-dark" type="submit" formaction="/reservas">Excluir</button>
-                  </form>
-                </td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Laboratório</td>
-                <td>PCs com intel i5, 8GB de RAM</td>
-                <td>20</td>
-                <td>Sim</td>
-                <td>
-                  <form action="">
-                    <button class="btn btn-sm btn-dark" type="submit" formaction="/cadastrar-sala">Editar</button>
-                    <button class="btn btn-sm btn-dark" type="submit" formaction="/reservas">Desativar</button>
-                    <button class="btn btn-sm btn-dark" type="submit" formaction="/reservas">Excluir</button>
-                  </form>
-                </td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Laboratório</td>
-                <td>PCs com intel i5, 8GB de RAM</td>
-                <td>20</td>
-                <td>Sim</td>
-                <td>
-                  <form action="">
-                    <button class="btn btn-sm btn-dark" type="submit" formaction="/cadastrar-sala">Editar</button>
-                    <button class="btn btn-sm btn-dark" type="submit" formaction="/reservas">Desativar</button>
-                    <button class="btn btn-sm btn-dark" type="submit" formaction="/reservas">Excluir</button>
-                  </form>
-                </td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Laboratório</td>
-                <td>PCs com intel i5, 8GB de RAM</td>
-                <td>20</td>
-                <td>Sim</td>
-                <td>
-                  <form action="">
-                    <button class="btn btn-sm btn-dark" type="submit" formaction="/cadastrar-sala">Editar</button>
-                    <button class="btn btn-sm btn-dark" type="submit" formaction="/reservas">Desativar</button>
-                    <button class="btn btn-sm btn-dark" type="submit" formaction="/reservas">Excluir</button>
-                  </form>
-                </td>
-              </tr>
-              
-              
-            </tbody>
-          </table>
-        </div>
-        
+              {% for sala in salas %}
+                <tr>
+                  <td>{{sala.id}}</td>
+                  <td>{{sala.tipo}}</td>
+                  <td>{{sala.descricao}}</td>
+                  <td>{{sala.capacidade}}</td>
+                  <td>{{sala.ativa}}</td>
+                  <td>
+                    <form action="">
+                      <button class="btn btn-sm btn-dark" type="submit" formaction="/cadastrar-sala">Editar</button>
+                      <button class="btn btn-sm btn-dark" type="submit" formaction="/reservas">Desativar</button>
+                      <button class="btn btn-sm btn-dark" type="submit" formaction="/reservas">Excluir</button>
+                    </form>
+                  </td>
+                </tr>
+              {% endfor %}
+
+        </tbody>
+        </table>
       </div>
     </div>
+  </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

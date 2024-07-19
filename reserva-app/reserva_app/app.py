@@ -1,6 +1,13 @@
 from flask import Flask , render_template, request
-from arquivo import obter_usuario,salvar_usuario
+from arquivo import obter_usuario,salvar_usuario, salvar_sala , obter_salas
 app = Flask("Reserva-App") 
+
+tipos_salas = {
+    "1" : "Laboratório de Informática",
+    "2" : "Laboratório de Química",
+    "3" : "Sala de Aula"
+}
+
 
 @app.route("/")
 def login(): 
@@ -25,6 +32,10 @@ def reservarsala():
 @app.route("/reservas")
 def reservas(): 
     return render_template("reservas.html")
+
+@app.route("/detalhe-reserva")
+def  detalhe_reserva(): 
+    return render_template("reserva/detalhe-reserva.html")
 
 #login de usuário
 @app.route("/", methods = ['POST'])
@@ -57,4 +68,14 @@ def cadastrar():
     salvar_usuario(nome,email,password)
     return render_template("login.html")
 
+@app.route("/cadastrar-sala", methods = ['POST'])
+def cadastrar_sala():
+    salas =  obter_salas()
+    id = (len(salas))+1
+    tipo = request.form['tipo'].strip()
+    nome_tipo = tipos_salas[str(tipo)]
+    capacidade = request.form['capacidade'].strip()
+    descricao = request.form['descricao'].strip()
+    salvar_sala(id,nome_tipo,capacidade,descricao,"Sim")
+    return render_template("listar-salas.html" , salas = obter_salas() )
 app.run()

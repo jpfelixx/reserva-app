@@ -1,5 +1,5 @@
 def obter_usuario():
-    with open("reserva_app/usuario.csv", "r") as arquivo_usuario:
+    with open("reserva_app/usuario.csv", "r", encoding="utf8") as arquivo_usuario:
         usuarios = []
         for usuario in arquivo_usuario:
             dados_usuario = usuario.strip().split(",")
@@ -10,9 +10,30 @@ def obter_usuario():
             }
             usuarios.append(usuario)
         return usuarios
+    
+def obter_salas():
+    with open("reserva_app/salas.csv", "r",encoding="utf8") as arquivo_salas:
+        salas = []
+        for sala in arquivo_salas:
+            dados_sala = sala.strip().split(",")
+            sala = {
+                "id" : dados_sala[0],
+                "tipo": dados_sala[1],
+                "capacidade": dados_sala[2],
+                "descricao": dados_sala[3],
+                "ativa": dados_sala[4]
+            }
+
+            salas.append(sala)
+        return salas
 
 def salvar_usuario(nome, email, password):
-    print(nome,email,password)
-    with open("reserva_app/usuario.csv", "a") as arquivo_usuario2: 
+    with open("reserva_app/usuario.csv", "a", encoding="utf8") as arquivo_usuario2: 
         usuario =  f"{nome},{email},{password}"
-        arquivo_usuario2.write(f"\n{usuario}")
+        arquivo_usuario2.write(f"{usuario}\n")
+
+
+def salvar_sala(id,tipo, capacidade, descricao, ativa):
+    with open("reserva_app/salas.csv", "a",encoding="utf8") as arquivo_salas: 
+        sala =  f"{id},{tipo},{capacidade},{descricao},{ativa}"
+        arquivo_salas.write(f"{sala}\n")
