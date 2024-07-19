@@ -8,6 +8,7 @@ Projeto em grupo: Aplicação de exemplo para aulas sobre desenvolvimento web ba
 - João Pedro de Oliveira Felix
 - Jossana Kelly Tavares Marques
 - Marisa Mayumi Morita Ouchi
+- Millena Nunes Cupolillo 
 
 ## Usuários vs. Funcionalidades
 - Administrador
