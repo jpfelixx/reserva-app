@@ -37,3 +37,9 @@ def salvar_sala(id,tipo, capacidade, descricao, ativa):
     with open("reserva_app/salas.csv", "a",encoding="utf8") as arquivo_salas: 
         sala =  f"{id},{tipo},{capacidade},{descricao},{ativa}"
         arquivo_salas.write(f"{sala}\n")
+
+
+def salvar_reserva(sala, inicio, fim):
+    with open("reserva_app/reservas.csv", "a", encoding="utf8") as arquivo_reservas: 
+        reserva =  f"{sala},{inicio},{fim}"
+        arquivo_reservas.write(f"{reserva}\n")

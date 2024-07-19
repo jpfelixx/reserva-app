@@ -1,5 +1,5 @@
 from flask import Flask , render_template, request
-from arquivo import obter_usuario,salvar_usuario, salvar_sala , obter_salas
+from arquivo import obter_usuario,salvar_usuario, salvar_sala , obter_salas , salvar_reserva
 app = Flask("Reserva-App") 
 
 tipos_salas = {
@@ -23,7 +23,7 @@ def cadastrarsala():
 
 @app.route("/listar-salas")
 def listarsalas(): 
-    return render_template("listar-salas.html")
+    return render_template("listar-salas.html" , salas = obter_salas() )
 
 @app.route("/reservar-sala")
 def reservarsala(): 
@@ -78,4 +78,18 @@ def cadastrar_sala():
     descricao = request.form['descricao'].strip()
     salvar_sala(id,nome_tipo,capacidade,descricao,"Sim")
     return render_template("listar-salas.html" , salas = obter_salas() )
+
+
+
+@app.route("/reservar-sala", methods = ['POST'])
+def reservar_sala():
+    sala = request.form['sala'].strip()
+    inicio =str(request.form['inicio'].strip())
+    fim = str(request.form['fim'].strip())
+    print(sala,inicio,fim)
+    salvar_reserva(sala,inicio,fim)
+    return render_template("reserva/detalhe-reserva.html")
+
 app.run()
+
+
