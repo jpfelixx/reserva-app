@@ -68,16 +68,16 @@
             <tbody>
               {% for sala in salas %}
                 <tr>
-                  <td>{{sala.id}}</td>
+                  <td>{{sala.codigo}}</td>
                   <td>{{sala.tipo}}</td>
                   <td>{{sala.descricao}}</td>
                   <td>{{sala.capacidade}}</td>
                   <td>{{sala.ativa}}</td>
                   <td>
-                    <form action="">
-                      <button class="btn btn-sm btn-dark" type="submit" formaction="/cadastrar-sala">Editar</button>
-                      <button class="btn btn-sm btn-dark" type="submit" formaction="/reservas">Desativar</button>
-                      <button class="btn btn-sm btn-dark" type="submit" formaction="/reservas">Excluir</button>
+                    <form action="" method="post">
+                      <button class="btn btn-sm btn-dark" type="submit" formaction="/editar">Editar</button>
+                      <button class="btn btn-sm btn-dark" type="submit" formaction="/desativar">Desativar</button>
+                      <button class="btn btn-sm btn-dark" type="submit" formaction="/excluir">Excluir</button>
                     </form>
                   </td>
                 </tr>
