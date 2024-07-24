@@ -1,5 +1,9 @@
 from flask import Flask , render_template, request
 from arquivo import obter_usuario,salvar_usuario, salvar_sala , obter_salas , salvar_reserva, substituir_csv_salas, obter_reservas
+from datetime import datetime
+
+formato_data_hora = '%d/%m/%Y - %H:%M' # exemplo: 30/04/2024 - 16:30
+
 app = Flask("Reserva-App") 
 
 tipos_salas = {
@@ -48,8 +52,6 @@ def entrar():
 
     #percorrendo a lista e comparando
     for usuario in usuarios: 
-        print('ARQUIVO:',usuario['email'], usuario['password'])
-        print('FORMS',email,password)
         if (email == usuario['email']) and (password == usuario['password']):
             contem = True
               
@@ -81,17 +83,29 @@ def cadastrar_sala():
     salvar_sala(codigo,nome_tipo,capacidade,descricao,"Sim")
     return render_template("listar-salas.html" , salas = obter_salas() )
 
+
 @app.route("/reservar-sala", methods = ['POST'])
 def reservar_sala():
     reservas = obter_reservas()
     codigo = len(reservas)+1
     sala = request.form['sala'].strip()
-    inicio = (request.form['inicio'].strip())
-    fim = (request.form['fim'].strip())
-    print(sala,inicio,fim)
-    salvar_reserva(codigo,sala,inicio,fim, "Usuário padrão")
-    # criar dict pra lançar no html, ou passar um por um
-    return render_template("reserva/detalhe-reserva.html", )
+    inicio = datetime.strptime(request.form['inicio'].strip(), '%Y-%m-%dT%H:%M') 
+    fim = datetime.strptime(request.form['fim'].strip(), '%Y-%m-%dT%H:%M') 
+
+    inicio_formatado = inicio.strftime(formato_data_hora)
+    fim_formatado = fim.strftime(formato_data_hora)
+
+    salvar_reserva(codigo,sala,inicio_formatado,fim_formatado, "Usuário padrão")
+
+    reserva_atual = {
+        "codigo" : codigo,
+        "sala": sala,
+        "inicio":inicio_formatado,
+        "fim": fim_formatado,
+        "usuario": "Usuário padrão"
+    }
+    
+    return render_template("reserva/detalhe-reserva.html", reserva = reserva_atual)
 
 
 @app.route("/editar", methods = ['POST'])
@@ -101,19 +115,15 @@ def editar_sala():
 
 @app.route("/desativar", methods = ['POST'])
 def desativar_sala():
-    id = 1
+    id = 1 # id padrão
     salas = obter_salas()
     salas[id]['ativa'] = "Não"
     substituir_csv_salas(salas)
     return render_template("listar-salas.html", salas = obter_salas())
 
-@app.route("/excluir",methods = ['POST'])
+@app.route("/excluir", methods = ['POST'])
 def excluir_sala(): 
     return render_template("login.html")
 
 
-
-
 app.run()
-
-
