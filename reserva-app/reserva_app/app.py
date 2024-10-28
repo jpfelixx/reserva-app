@@ -116,7 +116,7 @@ def editar_sala():
 @app.route("/desativar", methods = ['POST'])
 def desativar_sala():
     id = 1 
-    salas = obter_salas()
+    salas = obter_salas(con)
     salas[id]['ativa'] = False
     
     return render_template("listar-salas.html", salas = obter_salas(con))
